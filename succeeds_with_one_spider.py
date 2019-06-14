@@ -5,7 +5,7 @@ from scrapy.exceptions import DontCloseSpider
 from scrapy.xlib.pydispatch import dispatcher
 
 
-class SpideIdleTest(scrapy.Spider):
+class SpiderIdleTest(scrapy.Spider):
     custom_settings = {
         'CONCURRENT_REQUESTS': 1,
         'DOWNLOAD_DELAY': 2,
@@ -33,7 +33,7 @@ class SpideIdleTest(scrapy.Spider):
 
 
 process = CrawlerProcess()
-process.crawl(SpideIdleTest)
-process.crawl(SpideIdleTest)
-process.crawl(SpideIdleTest)
+process.crawl(SpiderIdleTest)
+process.crawl(SpiderIdleTest)
+process.crawl(SpiderIdleTest)
 process.start()
