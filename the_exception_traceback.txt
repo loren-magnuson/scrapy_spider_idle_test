@@ -1,0 +1,10 @@
+2019-06-14 10:41:22 [scrapy.utils.signal] ERROR: Error caught on signal handler: <bound method ?.spider_idle of <SpideIdleTest None at 0x7f514b33c550>>
+Traceback (most recent call last):
+  File "/home/loren/.virtualenv/spider_idle_test/local/lib/python2.7/site-packages/scrapy/utils/signal.py", line 30, in send_catch_log
+    *arguments, **named)
+  File "/home/loren/.virtualenv/spider_idle_test/local/lib/python2.7/site-packages/pydispatch/robustapply.py", line 55, in robustApply
+    return receiver(*arguments, **named)
+  File "fails_with_multiple_spiders.py", line 25, in spider_idle
+    spider)
+  File "/home/loren/.virtualenv/spider_idle_test/local/lib/python2.7/site-packages/scrapy/core/engine.py", line 209, in crawl
+    "Spider %r not opened when crawling: %s" % (spider.name, request)
