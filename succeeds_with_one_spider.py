@@ -34,6 +34,4 @@ class SpiderIdleTest(scrapy.Spider):
 
 process = CrawlerProcess()
 process.crawl(SpiderIdleTest)
-process.crawl(SpiderIdleTest)
-process.crawl(SpiderIdleTest)
 process.start()
