@@ -18,7 +18,7 @@ class SpiderIdleTest(scrapy.Spider):
     def spider_idle(self, spider):
         self.idle_retries += 1
         if self.idle_retries < 3:
-            self.crawler.engine.crawl(
+            spider.crawler.engine.crawl(
                 Request('https://www.google.com',
                         self.parse,
                         dont_filter=True),

@@ -6,7 +6,33 @@ from scrapy.xlib.pydispatch import dispatcher
 
 
 class SpiderIdleTest(scrapy.Spider):
+    custom_settings = {
+        'CONCURRENT_REQUESTS': 1,
+        'DOWNLOAD_DELAY': 2,
+    }
 
+    def __init__(self):
+        dispatcher.connect(self.spider_idle, signals.spider_idle)
+        self.idle_retries = 0
+
+    def spider_idle(self, spider):
+        self.idle_retries += 1
+        if self.idle_retries < 3:
+            self.crawler.engine.crawl(
+                Request('https://www.google.com',
+                        self.parse,
+                        dont_filter=True),
+                spider)
+            raise DontCloseSpider("Stayin' alive")
+
+    def start_requests(self):
+        yield Request('https://www.google.com', self.parse)
+
+    def parse(self, response):
+        print(response.css('title::text').extract_first())
+
+
+class SpiderIdleTest2(scrapy.Spider):
     custom_settings = {
         'CONCURRENT_REQUESTS': 1,
         'DOWNLOAD_DELAY': 2,
@@ -35,6 +61,6 @@ class SpiderIdleTest(scrapy.Spider):
 
 process = CrawlerProcess()
 process.crawl(SpiderIdleTest)
-process.crawl(SpiderIdleTest)
-process.crawl(SpiderIdleTest)
+process.crawl(SpiderIdleTest2)
+
 process.start()
